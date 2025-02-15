@@ -7,7 +7,7 @@ import { UserProvider } from "./context/UserContext";
 import { ProductProvider } from "./context/ProductContext";
 import { CartProvider } from "./context/CartContext";
 
-export const server = "http://localhost:4000";
+export const server = "https://electronicsuyash.onrender.com";
 
 export const categories = [
   "smartphone",
