@@ -67,7 +67,7 @@ const Payment = () => {
 
     if (method === "online") {
       const stripePromise = loadStripe(
-        "pk_test_51QZEIUFMvOph2hyWyfOWX8VP9LAHjNTzzkExAHOzCqAR7KzHmcU5zufHu51eSnUbxRw49XmOme3vdTmeho2kE9fv00h2fOMgnC"
+        "pk_test_51QpvGOKPFCXq1YBzt7nalAkG6M62qbB00XpY6b1Iwfgr22LZnFYWuIDiQzU0DHhyJUIdAbkCDCs8ErC7UA11XBfy005mrgWaM0"
       );
 
       try {

@@ -4,7 +4,7 @@ const schema = new mongoose.Schema(
   {
     items: [
       {
-        quantity: {
+        quauntity: {
           type: Number,
           required: true,
         },

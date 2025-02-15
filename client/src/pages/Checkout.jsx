@@ -26,7 +26,7 @@ const Checkout = () => {
         headers: {
           token: Cookies.get("token"),
         },
-      });
+      });  
 
       setAddress(data);
       setLoading(false);

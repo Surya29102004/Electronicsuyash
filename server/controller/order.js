@@ -18,12 +18,14 @@ export const newOrderCod = TryCatch(async (req, res) => {
     select: "title price",
   });
 
+  // console.log(cart);
+
   if (!cart.length) return res.status(400).json({ message: "Cart is empty" });
 
   let subTotal = 0;
 
   const items = cart.map((i) => {
-    const itemSubtotal = i.product.price * i.quantity; // Corrected typo
+    const itemSubtotal = i.product.price * i.quauntity; // Corrected typo
 
     subTotal += itemSubtotal;
 
@@ -31,7 +33,7 @@ export const newOrderCod = TryCatch(async (req, res) => {
       product: i.product._id,
       name: i.product.title,
       price: i.product.price,
-      quantity: i.quantity, // Corrected typo
+      quauntity: i.quauntity, // Corrected typo
     };
   });
 
@@ -48,8 +50,8 @@ export const newOrderCod = TryCatch(async (req, res) => {
     const product = await Product.findById(i.product);
 
     if (product) {
-      product.stock -= i.quantity; // Corrected typo
-      product.sold += i.quantity;  // Corrected typo
+      product.stock -= i.quauntity; // Corrected typo
+      product.sold += i.quauntity;  // Corrected typo
 
       await product.save();
     }
@@ -153,9 +155,11 @@ export const newOrderOnline = async (req, res) => {
     }
 
     const subTotal = cart.reduce(
-      (total, item) => total + item.product.price * item.quantity, // Corrected typo
+      (total, item) => total + item.product.price * item.quauntity, // ✅ Fixed typo
       0
     );
+
+    console.log("subject in NewOrderOnline", subTotal);
 
     const lineItems = cart.map((item) => ({
       price_data: {
@@ -166,10 +170,12 @@ export const newOrderOnline = async (req, res) => {
         },
         unit_amount: Math.round(item.product.price * 100),
       },
-      quantity: item.quantity, // Corrected typo
+      quantity: item.quauntity, // ✅ Fixed typo here
     }));
 
-    const sesssion = await stripe.checkout.sessions.create({
+    // console.log("lineItems", lineItems);
+
+    const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
       line_items: lineItems,
       mode: "payment",
@@ -184,8 +190,10 @@ export const newOrderOnline = async (req, res) => {
       },
     });
 
+    // console.log("session", session);
+
     res.json({
-      url: sesssion.url,
+      url: session.url,
     });
   } catch (error) {
     console.log("Error creating Stripe session:", error.message);
@@ -195,6 +203,7 @@ export const newOrderOnline = async (req, res) => {
   }
 };
 
+
 export const verifyPayment = async (req, res) => {
   const { sessionId } = req.body;
 
@@ -203,6 +212,8 @@ export const verifyPayment = async (req, res) => {
 
     const { userId, method, phone, address, subTotal } = session.metadata;
 
+    console.log('sessionMetadata', session.metadata);
+
     const cart = await Cart.find({ user: userId }).populate("product");
 
     const items = cart.map((i) => {
@@ -210,7 +221,7 @@ export const verifyPayment = async (req, res) => {
         product: i.product._id,
         name: i.product.title,
         price: i.product.price,
-        quantity: i.quantity, // Corrected typo
+        quauntity: i.quauntity, // Corrected typo
       };
     });
 
@@ -226,7 +237,7 @@ export const verifyPayment = async (req, res) => {
       const order = await Order.create({
         items: cart.map((item) => ({
           product: item.product._id,
-          quantity: item.quantity, // Corrected typo
+          quauntity: item.quauntity, // Corrected typo
         })),
         method,
         user: userId,
@@ -241,8 +252,8 @@ export const verifyPayment = async (req, res) => {
         const product = await Product.findById(i.product);
 
         if (product) {
-          product.stock -= i.quantity; // Corrected typo
-          product.sold += i.quantity;  // Corrected typo
+          product.stock -= i.quauntity; // Corrected typo
+          product.sold += i.quauntity;  // Corrected typo
 
           await product.save();
         }
