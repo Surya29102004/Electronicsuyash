@@ -26,7 +26,7 @@ const Navbar = () => {
   return (
     <div className="z-50 sticky top-0 bg-background/50 border-b backdrop-blur">
       <div className="container mx-auto px-6 py-4 flex flex-col sm:flex-row items-center justify-between">
-        <h1 className="text-2xl font-bold">QuickCart</h1>
+        <h1 className="text-2xl font-bold">Biranje Electronics</h1>
         <ul className="flex justify-center items-center space-x-6">
           <li className="cursor-pointer" onClick={() => navigate("/")}>
             Home

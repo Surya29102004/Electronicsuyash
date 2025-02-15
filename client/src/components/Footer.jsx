@@ -9,7 +9,7 @@ const Footer = () => {
       <div className="container mx-auto px-4 py-6">
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="mb-6 flex-col md:flex-row justify-between items-center">
-            <h1 className="text-xl font-bold">QuickCart</h1>
+            <h1 className="text-xl font-bold">Biranje Electronics</h1>
             <p className="text-sm">
               Your one-stop shop for everything you need.
             </p>
