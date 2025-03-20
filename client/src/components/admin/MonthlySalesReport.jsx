@@ -52,7 +52,7 @@ const MonthlySalesReport = () => {
                 <TableHeader>
                   <TableRow>
                     <TableHead>Month</TableHead>
-                    <TableHead>Total Sales ($)</TableHead>
+                    <TableHead>Total Sales (₹)</TableHead>
                     <TableHead>Total Orders</TableHead>
                   </TableRow>
                 </TableHeader>
@@ -61,7 +61,7 @@ const MonthlySalesReport = () => {
                     salesData.map((item, index) => (
                       <TableRow key={index}>
                         <TableCell>{item.month}</TableCell>
-                        <TableCell>${item.totalSales.toFixed(2)}</TableCell>
+                        <TableCell>₹{item.totalSales.toFixed(2)}</TableCell>
                         <TableCell>{item.totalOrders}</TableCell>
                       </TableRow>
                     ))
@@ -75,7 +75,7 @@ const MonthlySalesReport = () => {
                 </TableBody>
               </Table>
               <div className="mt-4">
-                <div className="text-lg font-semibold">Total Revenue: ${totalRevenue.toFixed(2)}</div>
+                <div className="text-lg font-semibold">Total Revenue: ₹{totalRevenue.toFixed(2)}</div>
                 <div className="text-lg font-semibold">Total Orders: {totalOrders}</div>
               </div>
             </CardContent>
