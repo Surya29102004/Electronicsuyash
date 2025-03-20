@@ -46,7 +46,7 @@ const StaticMonthlySalesReport = () => {
                 <th className="border px-4 py-2">Date</th>
                 <th className="border px-4 py-2">Product</th>
                 <th className="border px-4 py-2">Units Sold</th>
-                <th className="border px-4 py-2">Revenue ($)</th>
+                <th className="border px-4 py-2">Revenue (₹)</th>
               </tr>
             </thead>
             <tbody>
@@ -56,7 +56,7 @@ const StaticMonthlySalesReport = () => {
                     <td className="border px-4 py-2">{item?.date || "N/A"}</td>
                     <td className="border px-4 py-2">{item?.product || "N/A"}</td>
                     <td className="border px-4 py-2">{item?.unitsSold ?? 0}</td>
-                    <td className="border px-4 py-2">${item?.revenue?.toFixed(2) ?? "0.00"}</td>
+                    <td className="border px-4 py-2">₹{item?.revenue?.toFixed(2) ?? "0.00"}</td>
                   </tr>
                 ))
               ) : (
@@ -67,8 +67,8 @@ const StaticMonthlySalesReport = () => {
             </tbody>
           </table>
           <div className="mt-4">
-            <div className="text-lg font-semibold">Online Revenue: ${totalRevenue.online.toFixed(2)}</div>
-            <div className="text-lg font-semibold">COD Revenue: ${totalRevenue.cod.toFixed(2)}</div>
+            <div className="text-lg font-semibold">Online Revenue: ₹{totalRevenue.online.toFixed(2)}</div>
+            <div className="text-lg font-semibold">COD Revenue: ₹{totalRevenue.cod.toFixed(2)}</div>
             <div className="text-lg font-semibold">Total Orders: {totalOrders}</div>
             <div className="text-lg font-semibold">Total Units Sold: {unitsSold}</div> {/* Display total units sold */}
           </div>
