@@ -1,9 +1,10 @@
 import HomePage from "@/components/admin/HomePage";
 import InfoPage from "@/components/admin/InfoPage";
 import OrdersPage from "@/components/admin/OrdersPage";
+import MonthlySalesReport from "@/components/admin/MonthlySalesReport";
 import { Button } from "@/components/ui/button";
 import { UserData } from "@/context/UserContext";
-import { Home, Info, MenuIcon, ShoppingBag, X } from "lucide-react";
+import { Home, Info, MenuIcon, ShoppingBag, BarChart, X } from "lucide-react";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -21,17 +22,17 @@ const AdminDashboard = () => {
     switch (selectedPage) {
       case "home":
         return <HomePage />;
-
       case "orders":
         return <OrdersPage />;
-
       case "info":
         return <InfoPage />;
-
+      case "monthly-sales-report":
+        return <MonthlySalesReport />;
       default:
         return <HomePage />;
     }
   };
+
   return (
     <div className="flex min-h-screen">
       {/* sidebar */}
@@ -70,7 +71,15 @@ const AdminDashboard = () => {
             >
               <Info className="w-5 h-5" /> Info
             </Button>
-
+            <Button
+              variant="ghost"
+              onClick={() => setSelectedPage("monthly-sales-report")}
+              className={`w-full flex items-center gap-2 ${
+                selectedPage === "monthly-sales-report" ? "bg-gray-500" : ""
+              }`}
+            >
+              <BarChart className="w-5 h-5" /> Monthly Sales Report
+            </Button>
             <Button
               variant="ghost"
               className="lg:hidden"
@@ -91,7 +100,7 @@ const AdminDashboard = () => {
           >
             <MenuIcon className="w-5 h-5" />
           </Button>
-          <h2 className="text-lg font-bold hidden lg:block">Admin Dashoard</h2>
+          <h2 className="text-lg font-bold hidden lg:block">Admin Dashboard</h2>
         </div>
         <div className="p-4">{renderPageContent()}</div>
       </div>

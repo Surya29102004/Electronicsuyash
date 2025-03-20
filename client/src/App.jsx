@@ -16,6 +16,7 @@ import OrderProcessing from "./pages/OrderProcessing";
 import Orders from "./pages/Orders";
 import OrderPage from "./pages/OrderPage";
 import AdminDashboard from "./pages/AdminDashboard";
+import MonthlySalesReport from "./components/admin/MonthlySalesReport";
 
 const App = () => {
   const { isAuth, loading } = UserData();
@@ -39,6 +40,10 @@ const App = () => {
             <Route
               path="/admin/dashboard"
               element={isAuth ? <AdminDashboard /> : <Login />}
+            />
+            <Route
+              path="/admin/monthly-sales"
+              element={isAuth ? <MonthlySalesReport /> : <Login />}
             />
             <Route
               path="/checkout"

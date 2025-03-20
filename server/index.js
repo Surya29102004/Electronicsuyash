@@ -10,9 +10,9 @@ import productRoutes from "./routes/product.js";
 import cartRoutes from "./routes/cart.js";
 import addressRoutes from "./routes/address.js";
 import orderRoutes from "./routes/order.js";
+import salesRoutes from "./routes/sales.js"; // Import the new sales route
 
-
-dotenv.config(); 
+dotenv.config();
 
 cloudinary.v2.config({
   cloud_name: process.env.CLOUD_NAME,
@@ -28,8 +28,8 @@ const interval = 30000;
 function reloadWebsite() {
   axios
     .get(url)
-    .then((response) => {
-      console.log("website reloded");
+    .then(() => {
+      console.log("Website reloaded");
     })
     .catch((error) => {
       console.error(`Error : ${error.message}`);
@@ -41,8 +41,7 @@ setInterval(reloadWebsite, interval);
 app.use(express.json());
 app.use(cors());
 
-const port = process.env.PORT;
-
+const port = process.env.PORT || 4000; // Set default port
 
 // using routes
 app.use("/api", userRoutes);
@@ -50,8 +49,8 @@ app.use("/api", productRoutes);
 app.use("/api", cartRoutes);
 app.use("/api", addressRoutes);
 app.use("/api", orderRoutes);
-
+app.use("/api", salesRoutes);
 app.listen(port, () => {
-  console.log(`server is running on http://localhost:${port}`);
+  console.log(`Server is running on http://localhost:${port}`);
   connectDb();
 });
